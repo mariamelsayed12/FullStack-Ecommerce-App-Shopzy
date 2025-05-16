@@ -1,0 +1,79 @@
+.btn-AddToCard  {
+    width: 300px;
+    height: 60px;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    cursor: pointer;
+    border-radius: 0px;
+    border: none;
+    background-color: hsl(255deg 50% 40%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    font-family: "Inter", sans-serif;
+    padding: 0
+  }
+  
+  .default-btn-AddToCard {
+    width: 300px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(
+        90.1deg,
+        rgba(84, 212, 228, 1) 0.2%,
+        rgb(76, 57, 134) 99.9%
+    );
+    padding: 0;
+
+    }
+
+    .default-btn-AddToCard,
+    .hover-btn-AddToCard {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 1em 3em;
+    border-radius: 0px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    }
+
+    .hover-btn-AddToCard {
+    position: absolute;
+    inset: 0;
+    font-size: 18px;
+    padding: 1em 3em;
+    text-align: center;
+    background: #371F5A;
+    background: linear-gradient(
+        63deg,
+        #371F5A 0%,
+        rgba(69, 39, 160, 1) 100%
+    );
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transform: translate(0%, 100%);
+    }
+    .default-btn-AddToCard span {
+    color: hsl(0, 0%, 100%);
+    }
+    .hover-btn-AddToCard span {
+    color: hsl(0, 0%, 100%);
+    }
+    .btn-AddToCard:hover .default-btn-AddToCard {
+    transform: translate(0%, -100%);
+  }
+  
+  .btn-AddToCard:hover .hover-btn-AddToCard {
+    transform: translate(0%, 0%);
+  }
+  
