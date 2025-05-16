@@ -31,7 +31,7 @@ export default function Contact() {
   // Theme Colors
   const bgColor = useColorModeValue('white', 'black')
   const cardBg = useColorModeValue('#2a2b38', '#2a2b38')
-  const textTitleColor = useColorModeValue('#2a2b38', 'whiteAlpha.900')
+  const textTitleColor = useColorModeValue('whiteAlpha.900', 'whiteAlpha.900')
   const textColor = useColorModeValue('white', 'whiteAlpha.900')
   const buttonBg = useColorModeValue('rgb(226, 218, 255)', 'rgb(226, 218, 255)')
   const buttonHover = useColorModeValue('rgb(201, 187, 252)', 'rgb(189, 171, 253)')
@@ -129,7 +129,7 @@ export default function Contact() {
                   <Box m={8} color={textTitleColor}>
                     <VStack spacing={5}>
                       <FormControl id="name">
-                        <FormLabel>Your Name</FormLabel>
+                        <FormLabel textColor={textTitleColor}>Your Name</FormLabel>
                         <InputGroup borderColor="#E0E1E7">
                           <InputLeftElement pointerEvents="none">
                             <BsPerson color="gray.800" />
@@ -143,7 +143,7 @@ export default function Contact() {
                         </InputGroup>
                       </FormControl>
                       <FormControl id="email">
-                        <FormLabel>Mail</FormLabel>
+                        <FormLabel textColor={textTitleColor}>Mail</FormLabel>
                         <InputGroup borderColor="#E0E1E7">
                           <InputLeftElement pointerEvents="none">
                             <MdOutlineEmail color="gray.800" />
@@ -157,7 +157,7 @@ export default function Contact() {
                         </InputGroup>
                       </FormControl>
                       <FormControl id="message">
-                        <FormLabel>Message</FormLabel>
+                        <FormLabel textColor={textTitleColor}>Message</FormLabel>
                         <Textarea
                           borderColor="gray.300"
                           _hover={{ borderColor: buttonHover }}
