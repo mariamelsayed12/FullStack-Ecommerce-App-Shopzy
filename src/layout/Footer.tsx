@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import IconsOfSocial from '../components/Icons/IconsOfSocial'
 import {Link  as RouterLink} from 'react-router-dom'
+import Logo from "@/assets/logo.png";
 
 
 
@@ -38,7 +39,7 @@ export default function Footer() {
             {/* Logo */}
                               <RouterLink to="/Products">
                                   <Image
-                                      src="src/assets/logo.png"
+                                      src={Logo}
                                       alt="Logo"
                                       width="80px"
                                       height="70px"

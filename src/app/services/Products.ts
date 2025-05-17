@@ -22,18 +22,21 @@ interface IProductResponse {
     data: IProduct[];
 }
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
+
 export const ProductsApiSlice=createApi({
     reducerPath:'ApiProducts',
     tagTypes:['DashboardProducts'],
     refetchOnReconnect:true, 
     refetchOnMountOrArgChange:true,
-    baseQuery:fetchBaseQuery({baseUrl:"http://localhost:1337"}),
+    baseQuery:fetchBaseQuery({baseUrl:apiUrl}),
     endpoints:(builder)=>({
         // Get =>get
         getDashboardProductList: builder.query<IProductResponse, void>({
             query:()=>{
                 return{
-                    url:"/api/products?populate=thumbnail"
+                    url:"/products?populate=thumbnail"
                 }
             },
             providesTags: (result) =>
@@ -47,7 +50,7 @@ export const ProductsApiSlice=createApi({
         //Update=>put
         UpdateDashboardProducts: builder.mutation({
             query: ({ id, body }: { id: number|null; body: FormData }) => ({
-                url: `/api/products/${id}`,
+                url: `/products/${id}`,
                 method: "PATCH",
                 headers: {
                     Authorization: `Bearer ${CookiesService.get('jwt')}`
@@ -76,7 +79,7 @@ export const ProductsApiSlice=createApi({
         deleteDashboardProducts:builder.mutation({
             query:(id:number|null)=>{
                 return{
-                    url:`/api/products/${id}`,
+                    url:`/products/${id}`,
                     method:"DELETE",
                     headers:{
                         Authorization:`Bearer ${CookiesService.get('jwt')} `
