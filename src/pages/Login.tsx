@@ -41,7 +41,7 @@ export default function Login({ isAuthenticated }: IProps) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/Products')
+      navigate('/products')
     }
   }, [isAuthenticated, navigate])
 
@@ -161,7 +161,7 @@ export default function Login({ isAuthenticated }: IProps) {
                 >
                 <Text color="white" cursor="pointer">
                     Not have an account?{' '}
-                    <Link as={RouterLink} to="/SignUp" color="rgb(201, 187, 252)">
+                    <Link as={RouterLink} to="/signup" color="rgb(201, 187, 252)">
                     Sign up
                     </Link>
                 </Text>

@@ -63,7 +63,7 @@ const logOutHandler = () => {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-    {to:"/dashboard/DashboardProducts",name:"Products",icon:FiMenu},
+    {to:"/dashboard/dashboardproducts",name:"Products",icon:FiMenu},
     {to:"/products",name:"User Wbsite",icon:FiHome},
 ]
 

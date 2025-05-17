@@ -30,18 +30,18 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 
 <Route
-        path='/Blog'
+        path='/blog'
         element={
         <ArticleList/>
         }
 />
 
-<Route path='/Products' 
+<Route path='/products' 
                 element={
                         <ProductsPage/>
                 }/>
 
-<Route path='/DetailseOfProduct' 
+<Route path='/detailseofproduct' 
                 element={
                         <ProtectedRoute
                                 isAllowed={!!token}
@@ -55,7 +55,7 @@ const router = createBrowserRouter(createRoutesFromElements(
                 />
 
 
-<Route path='/ContectUs' 
+<Route path='/contectus' 
                 element={
                         <ContactUs/>
                 }/>
@@ -81,7 +81,7 @@ const router = createBrowserRouter(createRoutesFromElements(
                 }
         />
 
-<Route path='/dashboard/DashboardProducts' 
+<Route path='/dashboard/dashboardproducts' 
                 element={
                         <DashboardProducts/>
                 }/>
@@ -89,12 +89,12 @@ const router = createBrowserRouter(createRoutesFromElements(
 </Route>
 
 
-<Route path='/Login' 
+<Route path='/login' 
                 element={
                         <Login isAuthenticated={token}/>
                 }/>
 
-<Route path='/SignUP' 
+<Route path='/signuP' 
                 element={
                         <SignUpPage />
                 }/>

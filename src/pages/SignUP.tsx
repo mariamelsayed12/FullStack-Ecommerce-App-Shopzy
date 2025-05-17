@@ -33,7 +33,7 @@ export default function SignUP() {
 
     if (data) {
     setTimeout(() => {
-        navigate('/Login');
+        navigate('/login');
     }, 2000);
     }
 
@@ -187,7 +187,7 @@ export default function SignUP() {
               <Stack>
                 <Text align="center" color={textColor}>
                   Already a user?{" "}
-                  <Link as={RouterLink} to="/Login" color="rgb(201, 187, 252)">
+                  <Link as={RouterLink} to="/login" color="rgb(201, 187, 252)">
                     Login
                   </Link>
                 </Text>

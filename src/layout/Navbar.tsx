@@ -31,6 +31,10 @@ import LoginAndRegesterButton from '../components/UI/ButtonLoginAndRegester/Logi
 import ThemeToggle from '../components/ThemeToggle/ThemeToggle'
 import { ShoppingCart, Menu as MenuIcon, X, LogOut } from 'lucide-react'
 import CartDrawer from '../components/CartDrawer'
+import Logo from "@/assets/logo.png";
+
+
+
 
 export default function Navbar() {
     const dispatch = useDispatch()
@@ -72,12 +76,12 @@ export default function Navbar() {
         ) : (
             <HStack spacing={4}>
                 <LoginAndRegesterButton>
-                    <Link as={RouterLink} to="/Login">
+                    <Link as={RouterLink} to="/login">
                         Login
                     </Link>
                 </LoginAndRegesterButton>
                 <LoginAndRegesterButton>
-                    <Link as={RouterLink} to="/SignUP">
+                    <Link as={RouterLink} to="/signuP">
                         SignUP
                     </Link>
                 </LoginAndRegesterButton>
@@ -92,7 +96,7 @@ export default function Navbar() {
                     <Flex alignItems="center"  gap={10} px={5}>
                     <RouterLink to="/Products">
                         <Image
-                            src="src/assets/logo.png"
+                            src={Logo}
                             alt="Logo"
                             boxSize={{ base: '70px', md: '100px' }}
                             mx={{ base: 'auto', md: '0' }}
@@ -100,7 +104,7 @@ export default function Navbar() {
                     </RouterLink>
                     {isAdmin && (
                             <Flex gap={5} display={{ base: 'none', md: 'flex' }}>
-                                <Link as={RouterLink} to="/Products" fontWeight="bold" color="#2a2b38" fontSize="xl">
+                                <Link as={RouterLink} to="/products" fontWeight="bold" color="#2a2b38" fontSize="xl">
                                     Products
                                 </Link>
                                 <Link as={RouterLink} to="/dashboard" fontWeight="bold" color="#2a2b38" fontSize="xl">
@@ -144,7 +148,7 @@ export default function Navbar() {
                         <VStack align="start" spacing={4} width="100%">
                             {isAdmin && (
                                 <Flex justifyContent={"space-around"} alignItems={"center"} w={"full"}>
-                                    <Link as={RouterLink} to="/Products" onClick={onClose} fontWeight="bold" color={"#2a2b38"}>
+                                    <Link as={RouterLink} to="/products" onClick={onClose} fontWeight="bold" color={"#2a2b38"}>
                                         Products
                                     </Link>
                                     <Link as={RouterLink} to="/dashboard" onClick={onClose} fontWeight="bold" color={"#2a2b38"}>
@@ -175,12 +179,12 @@ export default function Navbar() {
                             ) : (
                                 <VStack align="start" spacing={3} width="100%">
                                     <LoginAndRegesterButton>
-                                        <Link as={RouterLink} to="/Login" onClick={onClose} width="100%">
+                                        <Link as={RouterLink} to="/login" onClick={onClose} width="100%">
                                             Login
                                         </Link>
                                     </LoginAndRegesterButton>
                                     <LoginAndRegesterButton>
-                                        <Link as={RouterLink} to="/SignUP" onClick={onClose} width="100%">
+                                        <Link as={RouterLink} to="/signuP" onClick={onClose} width="100%">
                                             SignUP
                                         </Link>
                                     </LoginAndRegesterButton>

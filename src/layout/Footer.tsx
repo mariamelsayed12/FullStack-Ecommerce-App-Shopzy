@@ -45,13 +45,13 @@ export default function Footer() {
                                   />
                               </RouterLink>
         <Stack textColor={'black'} direction={'row'} spacing={6}>
-          <Box as="a" href={'/Products'}>
+          <Box as="a" href={'/products'}>
             Home
           </Box>
-          <Box as="a" href={'/Blog'}>
+          <Box as="a" href={'/blog'}>
             Blog
           </Box>
-          <Box as={RouterLink} to='/ContectUs'>
+          <Box as={RouterLink} to='/contectus'>
             Contact
           </Box>
         </Stack>
