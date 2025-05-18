@@ -1,5 +1,4 @@
 export interface ISignup{
-
         username:string,
         email:string,
         password:string,
@@ -9,7 +8,7 @@ export interface ISignup{
 
 
 export interface Ilogin{
-        identifier:string,
+        email:string,
         password:string,
         jwt?:string
         user?:{
@@ -19,18 +18,11 @@ export interface Ilogin{
 
 export interface IProduct{
         id:number,
+        documentId?: string,
         title:string,
-        description:string
+        description:string,
         price:number,
         stock:number,
-        thumbnail:{
-                formats:{
-                        medium:{
-                        url:string
-                }
-                }
-        }
+        thumbnail:string,
         quantity?:number
-
-
 }

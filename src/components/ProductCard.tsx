@@ -4,7 +4,7 @@ import {  useNavigate } from 'react-router-dom'
 import { addId } from '../app/features/productIdSlice';
 import ButtonProduct from './UI/ButtonProduct/ButtonProduct';
 interface IProduct{
-    documentId:string
+    id:number
     title:string;
     description:string;
     price:number
@@ -14,14 +14,14 @@ interface IProduct{
 }
 
 
-const ProductCard = ({title,description,price,thumbnail,documentId}:IProduct) => {
+const ProductCard = ({id,title,description,price,thumbnail}:IProduct) => {
 
     // const {colorMode}=useColorMode()
     const navigate=useNavigate()
     const dispatch=useDispatch()
 
     const Navigatetoproduct=()=>{
-        dispatch(addId(documentId))
+        dispatch(addId(id))
         navigate('/DetailseOfProduct')
     }
     return ( 

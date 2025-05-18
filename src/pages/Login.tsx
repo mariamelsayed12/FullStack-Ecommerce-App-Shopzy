@@ -30,7 +30,7 @@ export default function Login({ isAuthenticated }: IProps) {
 
   const [showPassword, setShowPassword] = useState(false)
   const [user, setUser] = useState({
-    identifier: '',
+    email: '',
     password: ''
   })
 
@@ -53,12 +53,12 @@ export default function Login({ isAuthenticated }: IProps) {
   const sumbitHandler = (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault()
 
-    if (!user.identifier && !user.password) {
+    if (!user.email && !user.password) {
       setIsEmail(true)
       setIsPassword(true)
       return
     }
-    if (!user.identifier) {
+    if (!user.email) {
       setIsEmail(true)
       return
     }
@@ -105,8 +105,8 @@ export default function Login({ isAuthenticated }: IProps) {
                 isInvalid={isEmail}
                 onChange={onChangeHandler}
                 errorBorderColor={errorColor}
-                value={user.identifier}
-                name="identifier"
+                value={user.email}
+                name="email"
                 focusBorderColor="rgb(201, 187, 252)"
                 sx={{
                 _hover: {

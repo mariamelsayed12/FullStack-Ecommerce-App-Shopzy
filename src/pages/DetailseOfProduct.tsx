@@ -1,4 +1,4 @@
-import axiosInstance from '../config/axios.config';
+import { supabase } from '../config/supabaseClient';
 import { useQuery } from 'react-query';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import ProductCardSkeleton from '../components/ProductCardSkeleton';
@@ -13,19 +13,23 @@ import GoBackButton from '../components/UI/GoBack/GoBack';
 
 
 const DetailseOfProduct = () => {
-  const { documentId } = useSelector((state: RootState) => state.IdOfProduct);
+  const { id } = useSelector((state: RootState) => state.IdOfProduct);
   const navigate= useNavigate()
   const getProductList = async () => {
-
-    if (!documentId) throw new Error("No Product ID Provided");
-    const { data } = await axiosInstance.get(`/products/${documentId}?populate=thumbnail`);
-    return data;
+    if (!id) throw new Error("No Product ID Provided");
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (error) throw error;
+    return { data };
   };
 
   const { data, isLoading } = useQuery(
-    ["oneproduct", documentId], 
+    ["oneproduct", id], 
     getProductList, 
-    { enabled: !!documentId }
+    { enabled: !!id }
   );
 
   const goBack=()=>{
@@ -59,7 +63,7 @@ const DetailseOfProduct = () => {
           {data?.data ? (
         (() => {
           const product = data.data;
-          const thumbnailUrl = product.thumbnail?.formats?.medium?.url
+          const thumbnailUrl = product.thumbnail;
 
           return (
             <div key={product.id}>

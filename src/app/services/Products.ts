@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import CookiesService from '../../services/CookiesService'
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { supabase } from '../../config/supabaseClient'
 
 interface IProduct {
     id: number;
@@ -8,36 +8,27 @@ interface IProduct {
     description: string;
     stock: number;
     price: number;
-    thumbnail: {
-        formats: {
-            thumbnail: {
-                url: string;
-            };
-        };
-    };
+    thumbnail: string;
 }
-
 
 interface IProductResponse {
     data: IProduct[];
 }
 
-const apiUrl = import.meta.env.VITE_API_URL;
-
-
-export const ProductsApiSlice=createApi({
-    reducerPath:'ApiProducts',
-    tagTypes:['DashboardProducts'],
-    refetchOnReconnect:true, 
-    refetchOnMountOrArgChange:true,
-    baseQuery:fetchBaseQuery({baseUrl:apiUrl}),
-    endpoints:(builder)=>({
-        // Get =>get
+export const ProductsApiSlice = createApi({
+    reducerPath: 'ApiProducts',
+    tagTypes: ['DashboardProducts'],
+    refetchOnReconnect: true,
+    refetchOnMountOrArgChange: true,
+    baseQuery: () => ({ data: null }),
+    endpoints: (builder) => ({
         getDashboardProductList: builder.query<IProductResponse, void>({
-            query:()=>{
-                return{
-                    url:"/products?populate=thumbnail"
-                }
+            async queryFn() {
+                const { data, error } = await supabase
+                    .from('products')
+                    .select('*');
+                if (error) return { error };
+                return { data: { data: data || [] } };
             },
             providesTags: (result) =>
                 result
@@ -47,50 +38,32 @@ export const ProductsApiSlice=createApi({
                     ]
                     : [{ type: 'DashboardProducts', id: 'LIST' }],
         }),
-        //Update=>put
         UpdateDashboardProducts: builder.mutation({
-            query: ({ id, body }: { id: number|null; body: FormData }) => ({
-                url: `/products/${id}`,
-                method: "PATCH",
-                headers: {
-                    Authorization: `Bearer ${CookiesService.get('jwt')}`
-                },
-                body: body
-            }),
-            async onQueryStarted({id,...patch}, { dispatch, queryFulfilled }){
-                if (id === null) return; 
-                const patchResult = dispatch(
-                    ProductsApiSlice.util.updateQueryData('getDashboardProductList', undefined, (draft) => {
-                    Object.assign(draft, patch)
-                    })
-                );
-                try {
-                    await queryFulfilled
-                    } catch {
-                    patchResult.undo()
-                    }
-
+            async queryFn({ id, body }: { id: number | null; body: Partial<IProduct> }) {
+                if (id === null) return { error: { message: 'No ID provided' } };
+                const { data, error } = await supabase
+                    .from('products')
+                    .update(body)
+                    .eq('id', id)
+                    .select();
+                if (error) return { error };
+                return { data };
             },
-            invalidatesTags: [{ type: "DashboardProducts", id: "LIST" }]
+            invalidatesTags: [{ type: 'DashboardProducts', id: 'LIST' }],
         }),
-        
-
-        //Delete=>delete
-        deleteDashboardProducts:builder.mutation({
-            query:(id:number|null)=>{
-                return{
-                    url:`/products/${id}`,
-                    method:"DELETE",
-                    headers:{
-                        Authorization:`Bearer ${CookiesService.get('jwt')} `
-                    }
-                }
+        deleteDashboardProducts: builder.mutation({
+            async queryFn(id: number | null) {
+                if (id === null) return { error: { message: 'No ID provided' } };
+                const { error } = await supabase
+                    .from('products')
+                    .delete()
+                    .eq('id', id);
+                if (error) return { error };
+                return { data: { success: true } };
             },
-            invalidatesTags: [{ type: 'DashboardProducts', id: 'LIST' }]
-
-
+            invalidatesTags: [{ type: 'DashboardProducts', id: 'LIST' }],
         })
     }),
 })
 
-export const {useGetDashboardProductListQuery,useDeleteDashboardProductsMutation,useUpdateDashboardProductsMutation} =ProductsApiSlice
+export const { useGetDashboardProductListQuery, useDeleteDashboardProductsMutation, useUpdateDashboardProductsMutation } = ProductsApiSlice

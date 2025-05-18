@@ -1,21 +1,20 @@
-
 import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IshowProduct{
-    documentId:string
+    id:number
 }
 
 
 const initialState:IshowProduct={
-    documentId:''
+    id:0
 };
 
 const productIdSlice=createSlice({
     name:"IdOfProduct",
     initialState,
     reducers:{
-        addId:(state,action:PayloadAction<string>)=>{
-            state.documentId=action.payload
+        addId:(state,action:PayloadAction<number>)=>{
+            state.id=action.payload
         }
     }
 })

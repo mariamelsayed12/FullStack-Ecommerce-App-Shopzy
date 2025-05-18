@@ -1,38 +1,32 @@
 import ProductCard from '../components/ProductCard'
 import {  Grid } from '@chakra-ui/react'
-import { useQuery } from 'react-query'
-import axiosInstance from '../config/axios.config'
+import { useQuery} from 'react-query'
+import { supabase } from '../config/supabaseClient'
 import ProductCardSkeleton from '../components/ProductCardSkeleton'
-
-
 
 interface IProduct{
     id:number
-    documentId:string
     title:string;
     description:string;
     price:number
-    thumbnail:{
-        formats:{
-            medium:{
-                url:string
-            }
-        }
-    }
+    thumbnail:string
 }
 
 const getProductList=async()=>{
-    const{data }=await axiosInstance.get('/products?populate=thumbnail')
-    return data
+    const { data, error } = await supabase
+        .from('products')
+        .select('*');
+    if (error) throw error;
+    return { data };
 }
 
-
 const ProductsPage = () => {
-
     const {data ,isLoading}=useQuery(
         "products",
         ()=>getProductList()
     )
+
+    console.log("products data:", data);
 
     if(isLoading){
         return(
@@ -46,26 +40,17 @@ const ProductsPage = () => {
 
     return (
     <Grid margin={30} templateColumns={"repeat(auto-fill, minmax(300px,1fr))"} gap={6}>
-        {data?.data.length ? (
-                data.data.map((product: IProduct) => {
-                    const thumbnailUrl = product.thumbnail?.formats?.medium?.url
-                    return (
-                        <div key={product.id}>
-                            <ProductCard 
-                                documentId={product.documentId}
-                                title={product.title} 
-                                description={product.description} 
-                                price={product.price}  
-                                thumbnail={thumbnailUrl}
-                            />
-                        </div>
-                    );
-                })
-            ) : (
-                <p>No products yet</p>
-            )}
+        {Array.isArray(data?.data) && data.data.length ? (
+            data.data.map((product: IProduct) => (
+                <div key={product.id}>
+                    <ProductCard {...product} />
+                </div>
+            ))
+        ) : (
+            <p>No products yet</p>
+        )}
     </Grid>
-)
+    )
 }
 
 export default ProductsPage
