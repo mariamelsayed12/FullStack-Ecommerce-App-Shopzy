@@ -15,7 +15,7 @@ import ArticleList from '../pages/Blog.tsx'
 
 
 const token =CookiesService.get('jwt')
-const adminEmail = JSON.parse(localStorage.getItem('loggedInAdmin') || '""').trim().toLowerCase();
+const adminEmail = (localStorage.getItem('loggedInAdmin') || '').trim().toLowerCase();
 const isAdmin = adminEmail === 'test@gmail.com';
 
 const router = createBrowserRouter(createRoutesFromElements(

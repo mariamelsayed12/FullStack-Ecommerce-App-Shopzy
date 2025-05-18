@@ -54,7 +54,7 @@ export default function Navbar() {
         window.location.reload()
     }
 
-    const adminEmail = JSON.parse(localStorage.getItem('loggedInAdmin') || '""').trim().toLowerCase()
+    const adminEmail = (localStorage.getItem('loggedInAdmin') || '').trim().toLowerCase()
     const isAdmin = adminEmail === 'test@gmail.com'
 
     const renderAuthButtons = () =>

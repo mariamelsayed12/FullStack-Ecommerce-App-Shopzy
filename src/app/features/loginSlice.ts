@@ -1,6 +1,7 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 import { supabase } from '../../config/supabaseClient';
 import { createStandaloneToast } from "@chakra-ui/react";
+import CookiesService from "../../services/CookiesService";
 
 interface IloginInfo{
     loading:boolean ;
@@ -43,11 +44,21 @@ const loginSlice=createSlice({
         builder.addCase(userlogin.fulfilled, (state, action) => {
             state.loading = false;
             state.data = action.payload;
+            
             toast({
                 title: 'Logged in successfully',
                 status: 'success',
                 isClosable: true,
             });
+            // إعداد الكوكيز لمدة 3 أيام
+            const date = new Date();
+            const IN_DAYS = 3;
+            const EXPIRES_IN_MS = 1000 * 60 * 60 * 24 * IN_DAYS;
+            date.setTime(date.getTime() + EXPIRES_IN_MS);
+            const options = { path: '/', expires: date };
+            const token = action.payload?.session?.access_token || '';
+            CookiesService.set('jwt', token, options);
+            localStorage.setItem('loggedInAdmin', action.payload?.user?.email || '');
             setTimeout(() => {
                 location.replace('/Products');
             }, 2000);
