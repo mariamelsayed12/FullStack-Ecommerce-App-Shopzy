@@ -38,7 +38,6 @@ const DashboardProductsTable = () => {
         stock: 0,
         thumbnail: ''
     })
-    const [Thumbnail,setThumbnail]=useState< File|null>(null)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { isOpen:isModelOpen, onOpen:onModelOpen, onClose:onModelClose } = useDisclosure()
     const {isLoading,data}=useGetDashboardProductListQuery()
@@ -71,12 +70,6 @@ const DashboardProductsTable = () => {
             ...prevProduct,
             stock:+value
         }));
-    }
-
-    const onchangeThumbnail=(e:ChangeEvent<HTMLInputElement>)=>{
-        if (e.target.files && e.target.files.length > 0) {
-            setThumbnail(e.target.files[0]); 
-        }
     }
 
     const onsubmitHandler=()=>{
@@ -240,8 +233,7 @@ const DashboardProductsTable = () => {
                 accept='image/png, image/gif, image/jpeg'
                 p={2} 
                 type='file' 
-                onChange={onchangeThumbnail}
-                />
+            />
             </FormControl>
 
     </CustomeModel>
