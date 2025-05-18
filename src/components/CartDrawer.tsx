@@ -34,7 +34,7 @@ const CartDrawer = () => {
     cartProducts.length?
     (
         cartProducts.map((item) => {
-            const thumbnailUrl = item.thumbnail?.formats?.medium?.url
+            const thumbnailUrl = item.thumbnail;
             return (
                 <div key={item.id}>
                 <CartDrawerItem key={item.id} price={item.price} id={item.id} quantity={item.quantity} thumbnail={thumbnailUrl} title={item.title} />

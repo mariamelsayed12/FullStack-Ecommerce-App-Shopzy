@@ -14,18 +14,11 @@ import { RootState } from '../app/store'
 
 interface IProduct{
     id:number
-    documentId:string
-    title:string;
-    description:string;
-    stock:number
+    title:string
+    description:string
     price:number
-    thumbnail:{
-        formats:{
-            thumbnail:{
-                url:string
-            }
-        }
-    }
+    stock:number
+    thumbnail:string
 }
 
 
@@ -39,12 +32,11 @@ const DashboardProductsTable = () => {
     const [clickedProductId,setClickedProductId]=useState<number|null>(null)
     const [productToEdit,setProductToEdit]=useState<IProduct>({
         id: 0,
-        documentId: '',
         title: '',
         description: '',
-        stock: 0,
         price: 0,
-        thumbnail: { formats: { thumbnail: { url: '' } } }
+        stock: 0,
+        thumbnail: ''
     })
     const [Thumbnail,setThumbnail]=useState< File|null>(null)
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -88,27 +80,13 @@ const DashboardProductsTable = () => {
     }
 
     const onsubmitHandler=()=>{
-        console.log(productToEdit);
-        console.log(Thumbnail);
-
-    const formData = new FormData();
-    
-    formData.append(
-        "data",
-        JSON.stringify({
+        updateProduct({ id: clickedProductId, body: {
             title: productToEdit.title,
             price: productToEdit.price,
             stock: productToEdit.stock,
-            description: productToEdit.description
-        })
-    );
-
-    if (Thumbnail) {
-        formData.append("files.thumbnail", Thumbnail); 
-    }
-
-    updateProduct({ id: clickedProductId, body: formData }); 
-
+            description: productToEdit.description,
+            thumbnail: productToEdit.thumbnail
+        }});
     }
     
 
@@ -153,7 +131,7 @@ const DashboardProductsTable = () => {
     <Tbody>
     {data?.data.length ? (
         data.data.map((product:IProduct) => {
-            const thumbnailUrl = product.thumbnail?.formats?.thumbnail?.url
+            const thumbnailUrl = product.thumbnail;
             
             return ( 
                 <Tr key={product.id} >
@@ -178,7 +156,6 @@ const DashboardProductsTable = () => {
                             setProductToEdit(product)
                             onModelOpen()
                         }
-                            
                             }> 
                     <Pencil size={17}/>
                     </Button>
