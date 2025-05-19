@@ -30,6 +30,7 @@ import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs'
 export default function Contact() {
   // Theme Colors
   const bgColor = useColorModeValue('white', 'black')
+    const bgColortext = useColorModeValue('black', 'white')
   const cardBg = useColorModeValue('#2a2b38', '#2a2b38')
   const textTitleColor = useColorModeValue('whiteAlpha.900', 'whiteAlpha.900')
   const textColor = useColorModeValue('white', 'whiteAlpha.900')
@@ -128,8 +129,8 @@ export default function Contact() {
                 <Box bg={bgColor} borderRadius="lg">
                   <Box m={8} color={textTitleColor}>
                     <VStack spacing={5}>
-                      <FormControl id="name">
-                        <FormLabel textColor={textTitleColor}>Your Name</FormLabel>
+                      <FormControl id="name" mb={4}>
+                        <FormLabel color={bgColortext} fontWeight="bold" fontSize="md" mb={2}>Your Name</FormLabel>
                         <InputGroup borderColor="#E0E1E7">
                           <InputLeftElement pointerEvents="none">
                             <BsPerson color="gray.800" />
@@ -142,8 +143,8 @@ export default function Contact() {
                           />
                         </InputGroup>
                       </FormControl>
-                      <FormControl id="email">
-                        <FormLabel textColor={textTitleColor}>Mail</FormLabel>
+                      <FormControl id="email" mb={4}>
+                        <FormLabel color={bgColortext} fontWeight="bold" fontSize="md" mb={2}>Mail</FormLabel>
                         <InputGroup borderColor="#E0E1E7">
                           <InputLeftElement pointerEvents="none">
                             <MdOutlineEmail color="gray.800" />
@@ -156,8 +157,8 @@ export default function Contact() {
                           />
                         </InputGroup>
                       </FormControl>
-                      <FormControl id="message">
-                        <FormLabel textColor={textTitleColor}>Message</FormLabel>
+                      <FormControl id="message" mb={4}>
+                        <FormLabel color={bgColortext} fontWeight="bold" fontSize="md" mb={2}>Message</FormLabel>
                         <Textarea
                           borderColor="gray.300"
                           _hover={{ borderColor: buttonHover }}

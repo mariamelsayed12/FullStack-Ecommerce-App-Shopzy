@@ -77,6 +77,7 @@ export default function Login({ isAuthenticated }: IProps) {
   const cardBg = useColorModeValue('#2a2b38', '#2a2b38')
   const textTitleColor = useColorModeValue('#2a2b38', 'whiteAlpha.900')
   const textColor = useColorModeValue('white', 'whiteAlpha.900')
+
   const buttonBg = useColorModeValue('rgb(226, 218, 255)', 'rgb(226, 218, 255)')
   const buttonHover = useColorModeValue('rgb(201, 187, 252)', 'rgb(201, 187, 252)')
   const errorColor = 'crimson'
@@ -111,8 +112,10 @@ export default function Login({ isAuthenticated }: IProps) {
                 sx={{
                 _hover: {
                 borderColor: 'rgb(201, 187, 252)',
-            },
+            }
         }}
+        bg={useColorModeValue('white', '#2a2b38')}
+        textColor={useColorModeValue('black', 'whiteAlpha.900')}
             />
             {isEmail && (
                 <FormHelperText color={errorColor}>
@@ -137,6 +140,8 @@ export default function Login({ isAuthenticated }: IProps) {
                     borderColor: 'rgb(201, 187, 252)',
                 },  
                 }}
+                            bg={useColorModeValue('white', '#2a2b38')}
+                            textColor={useColorModeValue('black', 'whiteAlpha.900')}
                 />
                 <InputRightElement h="full">
                     <Button

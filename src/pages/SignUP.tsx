@@ -111,6 +111,8 @@ export default function SignUP() {
                 borderColor: 'rgb(201, 187, 252)',
             },
                 }}
+                bg={useColorModeValue('white', '#2a2b38')}
+                textColor={useColorModeValue('black', 'whiteAlpha.900')}
                 />
                 {isUsername && (
                 <FormHelperText color={errorColor}>
@@ -133,6 +135,8 @@ export default function SignUP() {
                 borderColor: 'rgb(201, 187, 252)',
                 },
                 }}
+                bg={useColorModeValue('white', '#2a2b38')}
+                textColor={useColorModeValue('black', 'whiteAlpha.900')}
                 />
                 {isEmail && (
                 <FormHelperText color={errorColor}>
@@ -157,6 +161,8 @@ export default function SignUP() {
                     borderColor: 'rgb(201, 187, 252)',
                     },
                     }}
+                    bg={useColorModeValue('white', '#2a2b38')}
+                    textColor={useColorModeValue('black', 'whiteAlpha.900')}
                 />
                 <InputRightElement h="full">
                     <Button
